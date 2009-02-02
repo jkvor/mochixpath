@@ -665,6 +665,7 @@ tokenize_charref(Bin, S=#decoder{offset=O}, Start) ->
                                          orelse C =:= ?SQUOTE
                                          orelse C =:= ?QUOTE
                                          orelse C =:= $/
+										 orelse C =:= $<
                                          orelse C =:= $> ->
             Len = O - Start,
             <<_:Start/binary, Raw:Len/binary, _/binary>> = Bin,
