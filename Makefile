@@ -19,6 +19,7 @@ ebin/%.beam : src/%.erl
 clean:
 	rm -f ebin/*.beam erl_crash.dump
 
-
-test: compile
-	erl -pa ebin -noshell -s test test  -s init stop
+test: all
+	prove -v t/*.t
+#test: compile
+#	erl -pa ebin -noshell -s test test  -s init stop

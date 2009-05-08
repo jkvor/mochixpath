@@ -21,7 +21,8 @@ default_functions() ->
         {'starts-with', fun 'starts-with'/2,[string,string]},
         {'substring', fun substring/2,[string,number,number]},
         {'sum', fun sum/2,[node_set]},
-        {'string-length', fun 'string-length'/2,[string]}
+        {'string-length', fun 'string-length'/2,[string]},
+		{'string', fun to_string/2, [node_set]}
     ].
 
 
@@ -73,3 +74,6 @@ sum(_Ctx,[Values]) ->
 %%            in the string, that isn't the same 
 'string-length'(_Ctx,[String]) ->
     size(String).
+
+to_string(_Ctx,[Values]) ->
+	binary_to_list(iolist_to_binary([mochiweb_html:to_html(Value) || Value <- Values])).
