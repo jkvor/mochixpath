@@ -76,4 +76,10 @@ sum(_Ctx,[Values]) ->
     size(String).
 
 to_string(_Ctx,[Values]) ->
-	binary_to_list(iolist_to_binary([mochiweb_html:to_html(Value) || Value <- Values])).
+	List = lists:foldr(
+		fun (Bin, Acc) when is_binary(Bin) -> [Bin|Acc];
+			({_,_,_}=Node, Acc) -> [mochiweb_html:to_html(Node)|Acc]
+		end, [], Values),
+	binary_to_list(iolist_to_binary(List)).
+	
+	
