@@ -65,7 +65,7 @@ test1() ->
 	
 test3() ->
 	mochiweb_http:start([
-		{loop, fun(Req) -> io:format("hey~n") end}, 
+		{loop, fun(_Req) -> io:format("hey~n") end}, 
 		{ip, "127.0.0.1"}, 
 		{port, 4056}]).	
 

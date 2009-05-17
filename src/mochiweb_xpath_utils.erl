@@ -61,9 +61,7 @@ boolean_value(B) when is_binary(B) ->
 boolean_value(B) when B == true;
                       B == false ->
               B.
-
-
-
+              
 convert(Value,number) ->
     number_value(Value);
 convert(Value,string) ->

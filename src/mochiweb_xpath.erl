@@ -233,10 +233,3 @@ comp_fun('>=') ->
   fun(A,B) -> 
     mochiweb_xpath_utils:number_value(A) >= mochiweb_xpath_utils:number_value(B) 
   end.
-
-
-
-
-
-
-
