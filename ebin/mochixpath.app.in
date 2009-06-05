@@ -1,0 +1,16 @@
+#!/bin/bash
+
+VERSION=${1}
+MODULES=`ls -1 src/*.erl | awk -F[/.] '{ print "\t\t" $2 }' | sed '$q;s/$/,/g'`
+
+cat > ebin/mochixpath.app << EOF
+{application, mochixpath, 
+	[{description, "mochixpath"},
+	{vsn, "${VERSION}"},
+	{modules, [
+${MODULES}
+	]},
+	{registered, []},
+	{applications, [kernel, stdlib]}
+]}.
+EOF
