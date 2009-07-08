@@ -78,14 +78,15 @@ execute(XPathString,Doc,Functions) when is_list(XPathString) ->
     XPath = mochiweb_xpath_parser:compile_xpath(XPathString),
     execute(XPath,Doc,Functions);
 
-execute(XPath,Doc,Functions) ->    
-    R = {root,none,[Doc]},
+execute(XPath,Doc,Functions) ->
+    R = if 
+        is_list(Doc) -> {root,none,Doc};
+        true -> {root,none,[Doc]}
+    end,
     Funs =  lists:foldl(fun(T={Key,_Fun,_Signature},Prev) ->
                             lists:keystore(Key,1,Prev,T)
             end,mochiweb_xpath_functions:default_functions(),Functions),
     execute_expr(XPath,#ctx{ctx=[R],root=R,functions=Funs}).
-
-
 
 execute_expr({path,'abs',Path},Ctx =#ctx{root=Root}) ->
     do_path_expr(Path,Ctx#ctx{ctx=[Root]});

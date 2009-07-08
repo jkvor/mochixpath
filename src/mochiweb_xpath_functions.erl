@@ -45,7 +45,8 @@ default_functions() ->
         {'substring', fun substring/2,[string,number,number]},
         {'sum', fun sum/2,[node_set]},
         {'string-length', fun 'string-length'/2,[string]},
-		{'string', fun to_string/2, [node_set]}
+		{'string', fun to_string/2, [node_set]},
+		{'last', fun last/2, [node_set]}
     ].
 
 
@@ -105,4 +106,6 @@ to_string(_Ctx,[Values]) ->
 		end, [], Values),
 	binary_to_list(iolist_to_binary(List)).
 	
+last(_Ctx, [Values]) -> 
+    lists:last(Values).
 	
