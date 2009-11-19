@@ -16,9 +16,9 @@ main(_) ->
 start() ->
     error_logger:tty(false),
 
-	XPath = "string(//dolphin)",
-	Xml = "<xml><ocean><dolphin>i'm gonna eat a dalphin</dolphin></ocean></xml>",
+	Xml = "<xml><ocean id='1'><dolphin>i'm gonna eat a dalphin</dolphin></ocean><ocean id='2'><squid>eyeball</squid></ocean></xml>",
 	Subject = mochiweb_html:parse(Xml),
-	etap:is(mochiweb_xpath:execute(XPath, Subject), "<dolphin>i'm gonna eat a dalphin</dolphin>", "xpath ok"),
-
+	etap:is(mochiweb_xpath:execute("string(//dolphin)", Subject), "<dolphin>i'm gonna eat a dalphin</dolphin>", "xpath ok"),
+    etap:is(mochiweb_xpath:execute("//xml/ocean/squid/..", Subject), {<<"ocean">>, [{<<"id">>, "2"}], [<<"eyeball">>]}, "xpath ok"),
+    
 	ok.
