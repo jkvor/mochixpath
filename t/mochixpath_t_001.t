@@ -19,6 +19,6 @@ start() ->
 	Xml = "<xml><ocean id='1'><dolphin>i'm gonna eat a dalphin</dolphin></ocean><ocean id='2'><squid>eyeball</squid></ocean></xml>",
 	Subject = mochiweb_html:parse(Xml),
 	etap:is(mochiweb_xpath:execute("string(//dolphin)", Subject), "<dolphin>i'm gonna eat a dalphin</dolphin>", "xpath ok"),
-    etap:is(mochiweb_xpath:execute("//xml/ocean/squid/..", Subject), {<<"ocean">>, [{<<"id">>, "2"}], [<<"eyeball">>]}, "xpath ok"),
+    etap:is(mochiweb_xpath:execute("//xml/ocean/squid", Subject), [{<<"squid">>,[],[<<"eyeball">>]}], "xpath ok"),
     
 	ok.
