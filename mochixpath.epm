@@ -1,0 +1,6 @@
+[
+	{deps, []},
+	{build_command, "make"},
+	{install_command, "make install"},
+	{test_command, "make test"}
+].
